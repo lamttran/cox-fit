@@ -34,7 +34,7 @@ times = rexp(n, c0 * exp(rowSums(t(t(x) * beta)) + yvar)) #time to death
 time.censor = rexp(n, c0 * exp(beta[1] * x[, 1] + yvar)) #time to censor
 censorv=ifelse(times < time.censor, 1, 0) #censoring vector, 1 if we know true time of death
 y = ifelse(times < time.censor, times, time.censor) #survival time (for coxph comparison)
-ord = order(y, decreasing =F) #order data by increasing time to death/censor
+ord = order(y, decreasing = FALSE) #order data by increasing time to death/censor
 dataset = list(x = x[ord,], y = y[ord], censor = censorv[ord]) #make dataset
 
 ```

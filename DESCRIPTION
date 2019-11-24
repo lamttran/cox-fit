@@ -1,5 +1,5 @@
 Package: coxfit
-Title: Fit Cox Proportional Hazards Model for Survival Data
+Title: Fit Cox Proportional Hazards Model for Ordered Survival Data
 Version: 1.0
 Authors@R: 
     person(given = "Lam",

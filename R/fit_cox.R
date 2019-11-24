@@ -25,7 +25,7 @@
 #' time.censor=rexp(n, c0 * exp(beta[1] * x[, 1] + yvar))
 #' censorv=ifelse(times < time.censor, 1, 0)
 #' y = ifelse(times < time.censor, times, time.censor)
-#' ord = order(y, decreasing =F)
+#' ord = order(y, decreasing = FALSE)
 #' dataset = list(x = x[ord,], y = y[ord], censor = censorv[ord])
 #' fit_cox(dataset$x, dataset$censor)
 #' all.equal(fit_cox(dataset$x, dataset$censor), as.numeric(coxph(Surv(dataset$y, dataset$censor) ~ dataset$x)$coefficients))

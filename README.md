@@ -10,7 +10,7 @@ A simple example for using coxfit with simulated survival data is described belo
 ````
 install.packages("devtools")
 library(devtools)
-install_github("lamttran/coxfit", build_vignettes = T)
+install_github("lamttran/cox-fit", build_vignettes = TRUE, force = TRUE)
 library(coxfit)
 ````
 2. Simulate some survival data:

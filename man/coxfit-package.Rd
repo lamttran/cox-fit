@@ -4,7 +4,7 @@
 \name{coxfit-package}
 \alias{coxfit}
 \alias{coxfit-package}
-\title{coxfit: Fit Cox Proportional Hazards Model for Survival Data}
+\title{coxfit: Fit Cox Proportional Hazards Model for Ordered Survival Data}
 \description{
 Assuming that the data is sorted in order of increasing survival time, coxfit fits a Cox Proportional Hazards 	model given a design matrix and a censoring vector. It gives equal results to the coxph function of the survival 	package.
 }
