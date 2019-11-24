@@ -1,0 +1,60 @@
+---
+title: "cox-fit-tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{cox-fit-tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include = FALSE}
+library(coxfit)
+library(survival)
+library(bench)
+```
+
+Simulate some survival data:
+
+```{r}
+set.seed(2019)
+p = 5 #number of parameters to estimate
+n = 100 #dataset sample size
+c0 = 0.5 #attenuation parameter for survival times
+beta = rnorm(p, 0, 1) #true parameter values
+x = matrix(rnorm(n * length(beta)), ncol = length(beta)) #design matrix
+yvar = rnorm(n, 0, 1) #variance in survival times
+times = rexp(n, c0 * exp(rowSums(t(t(x) * beta)) + yvar)) #time to death
+time.censor = rexp(n, c0 * exp(beta[1] * x[, 1] + yvar)) #time to censor
+censorv=ifelse(times < time.censor, 1, 0) #censoring vector, 1 if we know true time of death
+y = ifelse(times < time.censor, times, time.censor) #survival time (for coxph comparison)
+ord = order(y, decreasing =F) #order data by increasing time to death/censor
+dataset = list(x = x[ord,], y = y[ord], censor = censorv[ord]) #make dataset
+
+```
+
+Run fit_cox and compare to true beta values and coxph:
+
+```{r}
+beta
+fit_cox(dataset$x, dataset$censor)
+all.equal(fit_cox(dataset$x, dataset$censor), as.numeric(coxph(Surv(dataset$y, dataset$censor) ~ dataset$x)$coefficients))
+```
+
+Benchmarking against coxph:
+
+```{r fig1, fig.height = 3, fig.width = 5}
+timeresult = bench::mark(fit_cox(dataset$x, dataset$censor), as.numeric(coxph(Surv(dataset$y, dataset$censor) ~ dataset$x)$coefficients))
+timeresult$expression[[1]] <- "fit_cox" 
+timeresult$expression[[2]] <- "coxph" 
+print(timeresult)
+plot(timeresult)
+```  
+
+Although coxfit is about 1/3 as fast as coxph, no knowledge of the response y is required

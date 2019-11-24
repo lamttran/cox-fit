@@ -1,0 +1,26 @@
+Package: coxfit
+Title: Fit Cox Proportional Hazards Model for Survival Data
+Version: 1.0
+Authors@R: 
+    person(given = "Lam",
+           family = "Tran",
+           role = c("aut", "cre"),
+           email = "lamtran@umich.edu")
+Description: Assuming that the data is sorted in order of increasing survival time, coxfit fits a Cox Proportional Hazards 	model given a design matrix and a censoring vector. It gives equal results to the coxph function of the survival 	package.
+Depends:
+    tidyr,
+    ggplot2,
+    spatstat,
+    spatstat.utils,
+    survival,
+    ggbeeswarm
+Imports:
+    bench
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.1.1
