@@ -1,3 +1,7 @@
+<!-- badges: start -->
+  [![Travis build status](https://travis-ci.org/lamttran/cox-fit.svg?branch=master)](https://travis-ci.org/lamttran/cox-fit)
+  <!-- badges: end -->
+
 # coxfit
 
 This is the R package for Homework 4 of Biostat 625, Fall 2019. The Cox proportional hazards model is a commonly used regression model in the context of survival data (design matrix x, death or censoring time y, and censoring vector d). If the proportional hazards assumption is met, that is the explanatory variables act solely on the baseline hazard function and not the survival/failure times, the Cox model makes no assumptions on the underlying distribution of these times. As such, the Cox model is a semi-parametric model.
